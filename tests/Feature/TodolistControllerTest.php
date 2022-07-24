@@ -44,5 +44,23 @@ class TodolistControllerTest extends TestCase
         ])->post('/todolist', [
             'todo' => 'Nice'
         ])->assertRedirect('/todolist');
+    } 
+
+    public function testRemoveTodolist()
+    {
+        $this->withSession([
+            'user' => 'Bambang',
+            'todolist' => [
+                [
+                    'id' => '1',
+                    'todo' => 'Nice'
+                ],
+                [
+                    'id' => '2',
+                    'todo' => 'Es'
+                ]
+            ]
+        ])->post('/todolist/1/delete')
+            ->assertRedirect('/todolist');
     }
 }
